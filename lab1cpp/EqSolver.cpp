@@ -1,33 +1,46 @@
-#include <iostream>
-#include <cmath>
-using namespace std;
-int Solve(const double a, const double b, const double c, double& r1, double& r2) {
-	if (a == 0) {
-		if (b == 0) {
-			return -1;
-		}
-		r1 = -c / b;
-		r2 = -c / b;
-		return 0;
-	}
-	double discr = b * b - 4 * a * c;
-	if (discr < 0) {
-		return -1;
-	}
-	r1 = (-b + sqrt(discr)) / (2 * a);
-	r2 = (-b - sqrt(discr)) / (2 * a);
-	return 0;
-}
-int main() {
-	double a = 0;
-	double b = 0;
-	double c = 0;
-	double root1 = 0;
-	double root2 = 0;
-	cin >> a >> b >> c;
-	if (!Solve(a, b, c, root1, root2)) {
-		cout << "root1 is:" << root1 << " root2 is:" << root2 << endl;
-	}
-	else cout << "no roots or incorrect input";
+#include "Equation.h"
+const double eps = 1e-8;
 
+void solution::print() const {
+	switch (_root_count) {
+	case 0:
+		cout << "No roots or incorrect input";
+		break;
+	case 1:
+		cout << "Root is: " << _x1;
+		break;
+	case 2:
+		cout << "Roots are: " << _x1 << "," << _x2;
+		break;
+	}
 }
+
+solution equation::Solve() const {
+	double x_1 = 0;
+	double x_2 = 0;
+	if (abs(_a) < eps) {
+		if (abs(_b) < eps) {
+			return { 0,0,0 };
+		}
+		x_1 = -_c / _b;
+		x_2 = -_c / _b;
+		return { 1,x_1,x_2 };
+	}
+	double discr = _b * _b - 4 * _a * _c;
+	if (discr < 0) {
+		return { 0,0,0 };
+	}
+	x_1 = (-_b + sqrt(discr)) / (2 * _a);
+	x_2 = (-_b - sqrt(discr)) / (2 * _a);
+	return { 2, x_1,x_2 };
+}
+
+void Interface() {
+	equation eq(cin);
+	eq.Solve();
+	const solution sol = eq.Solve();
+	sol.print();
+}
+//int main() {
+//	Interface();
+//}
