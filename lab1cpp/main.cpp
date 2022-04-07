@@ -3,4 +3,5 @@
 
 int main() {
 	Interface();
+	return 0;
 }
