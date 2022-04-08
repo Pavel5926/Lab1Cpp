@@ -1,16 +1,16 @@
 #include "Equation.h"
 const double eps = 1e-8;
 
-void solution::print() const {
+void solution::print(std::ostream& out) const {
 	switch (_root_count) {
 	case 0:
-		cout << "No roots or incorrect input";
+		out << "No roots or incorrect input";
 		break;
 	case 1:
-		cout << "Root is: " << _x1;
+		out << "Root is: " << _x1;
 		break;
 	case 2:
-		cout << "Roots are: " << _x1 << "," << _x2;
+		out << "Roots are: " << _x1 << "," << _x2;
 		break;
 	}
 }
@@ -36,12 +36,15 @@ solution equation::Solve() const {
 }
 
 void Interface() {
-	equation eq(cin);
+	equation eq(std::cin);
 	eq.Solve();
 	const solution sol = eq.Solve();
-	sol.print();
+	sol.print(std::cout);
 }
 std::istream& operator >> (std::istream& is, equation& eqn) {
 	is >> eqn._a >> eqn._b >> eqn._c;
 	return is;
+}
+bool operator== (const solution& first, const solution& second) {
+	return ((first._root_count == second._root_count) && (first._x1 = second._x1) && (first._x2 = second._x2));
 }

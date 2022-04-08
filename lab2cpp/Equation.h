@@ -3,12 +3,12 @@
 #include <iostream>
 #include <cmath>
 
-using namespace std;
 void Interface();
 class solution {
 public:
+	friend bool operator== (const solution& first, const solution& second);
 	solution(int root_count, double x1, double x2) : _root_count(root_count), _x1(x1), _x2(x2) {};
-	void print() const;
+	void print(std::ostream& out) const;
 private:
 	int _root_count;
 	double _x1;

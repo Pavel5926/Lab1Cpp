@@ -1,5 +1,6 @@
 #include "students.hpp"
 
+std::string Student::getName() const { return this->_name; }
 solution BadStudent::Solve(equation eqn) const {
 	return { 1,0,0 }; 
 }
@@ -14,4 +15,4 @@ solution AverageStudent::Solve(equation eqn) const {
 	else {
 		return { 1,0,0 };
 	}
-}
+} 

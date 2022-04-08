@@ -5,26 +5,27 @@
 class Student {
 public:
 	Student(std::string name) : _name(name) {};
-	virtual solution Solve(equation eqn) const;
+	std::string getName() const;
+	virtual solution Solve(equation eqn) const = 0;
 	virtual ~Student() {};
 private:
 	std::string _name;
 };
 
-class BadStudent : Student {
+class BadStudent : public Student {
 public:
 	BadStudent(std::string name) : Student(name) {};
 	solution Solve(equation eqn) const override;
 
 };
 
-class GoodStudent : Student {
+class GoodStudent : public Student {
 public:
 	GoodStudent(std::string name) : Student(name) {};
 	solution Solve(equation eqn) const override;
 };
 
-class AverageStudent : Student {
+class AverageStudent : public Student {
 public:
 	AverageStudent(std::string name) : Student(name) {};
 	solution Solve(equation eqn) const override;
