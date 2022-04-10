@@ -27,15 +27,21 @@
     <ClCompile Include="teacher.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
+    <ClCompile Include="functions.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="students.hpp">
+    <ClInclude Include="students.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Equation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="teacher.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="functions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

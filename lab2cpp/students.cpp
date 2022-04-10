@@ -1,14 +1,15 @@
-#include "students.hpp"
+#include "students.h"
 
 std::string Student::getName() const { return this->_name; }
-solution BadStudent::Solve(equation eqn) const {
+
+Solution BadStudent::Solve(Equation &eqn) const {
 	return { 1,0,0 }; 
 }
-solution GoodStudent::Solve(equation eqn) const {
+Solution GoodStudent::Solve(Equation &eqn) const {
 	return eqn.Solve();
 }
 
-solution AverageStudent::Solve(equation eqn) const {
+Solution AverageStudent::Solve(Equation &eqn) const {
 	if (rand() % 2) {
 		return eqn.Solve();
 	}

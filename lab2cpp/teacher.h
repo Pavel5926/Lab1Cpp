@@ -6,8 +6,9 @@
 #include "Equation.h"
 class Teacher {
 public:
-	solution Solve(equation eqn) const;
-	void review(std::queue < std::tuple <equation, solution, std::string> >studQueue);
+	explicit Teacher(std::map <std::string, int > &res) : _results(res) {};
+	void review(std::queue < std::tuple <Equation, Solution, std::string> > &studQueue);
+	void publishResults();
 private:
 	std::map <std::string, int> _results;
 };

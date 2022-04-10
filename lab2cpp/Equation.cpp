@@ -1,21 +1,7 @@
 #include "Equation.h"
 const double eps = 1e-8;
 
-void solution::print(std::ostream& out) const {
-	switch (_root_count) {
-	case 0:
-		out << "No roots or incorrect input";
-		break;
-	case 1:
-		out << "Root is: " << _x1;
-		break;
-	case 2:
-		out << "Roots are: " << _x1 << "," << _x2;
-		break;
-	}
-}
-
-solution equation::Solve() const {
+Solution Equation::Solve() const {
 	double x_1 = 0;
 	double x_2 = 0;
 	if (abs(_a) < eps) {
@@ -35,16 +21,11 @@ solution equation::Solve() const {
 	return { 2, x_1,x_2 };
 }
 
-void Interface() {
-	equation eq(std::cin);
-	eq.Solve();
-	const solution sol = eq.Solve();
-	sol.print(std::cout);
-}
-std::istream& operator >> (std::istream& is, equation& eqn) {
+std::istream& operator >> (std::istream& is, Equation& eqn) {
 	is >> eqn._a >> eqn._b >> eqn._c;
 	return is;
 }
-bool operator== (const solution& first, const solution& second) {
-	return ((first._root_count == second._root_count) && (first._x1 = second._x1) && (first._x2 = second._x2));
-}
+
+bool Solution::operator== (const Solution& to_compare) {
+	return ((this->_root_count == to_compare._root_count) && (this->_x1 == to_compare._x1) && (this->_x2 == to_compare._x2));
+} 

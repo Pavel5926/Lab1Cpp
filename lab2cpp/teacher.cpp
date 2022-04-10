@@ -2,22 +2,30 @@
 #include "Equation.h"
 #include <tuple>
 #include <iterator>
-void Teacher::review(std::queue < std::tuple <equation, solution, std::string> > studQueue) {
-	if (!studQueue.empty()) {
-		std::tuple <equation, solution, std::string> pending = { studQueue.front() };
-		solution teacherSol = std::get<equation>(pending).Solve();
-		if (_results.find(std::get<std::string>(pending)) == _results.end()) {
-			_results.insert({ std::get<std::string>(pending), 0 });
+
+void Teacher::review(std::queue < std::tuple <Equation, Solution, std::string> > &studQueue) {
+	while (!studQueue.empty()) {
+		auto pending = studQueue.front();
+		studQueue.pop();
+		std::string studentName = std::get<std::string>(pending);
+		Solution teacherSol = std::get<Equation>(pending).Solve();
+		if (_results.find(studentName) == _results.end()) {
+			_results.insert({ studentName, 0 });
 		}
-		bool solvedRight = teacherSol == std::get<solution>(pending);
+		bool solvedRight = teacherSol == std::get<Solution>(pending);
 		std::map <std::string, int> ::iterator it;
-		it = _results.find(std::get<std::string>(pending);
+		it = _results.find(studentName);
 		if (solvedRight) {
-			_results[std::get<std::string>(pending)].second++;
+			it->second++;
 		}
 	}
-	//solution teacherSol = 
+	return;
 }
-solution Teacher::Solve(equation eqn) const {
-	return eqn.Solve();
+
+void Teacher::publishResults() {
+	for (auto it : _results) {
+		std::cout << it.first << " solved " << it.second << " tasks" << std::endl;
+	}
+	return;
 }
+
